@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 import "./globals.css";
+import classNames from "classnames";
 
 const instrunemt = Instrument_Sans({
   subsets: ["latin"],
@@ -17,9 +18,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const bodyClassName = classNames(instrunemt.className, "bg-white-light");
+
   return (
     <html lang="en">
-      <body className={instrunemt.className}>{children}</body>
+      <body className={bodyClassName}>{children}</body>
     </html>
   );
 }
