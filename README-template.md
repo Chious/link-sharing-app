@@ -56,6 +56,7 @@ Users should be able to:
 - [TailwindCSS](https://tailwindcss.com)
 - [prettier](https://www.npmjs.com/package/prettier), [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss)
 - [Ant Design](https://ant.design) - React UI Library
+- [Framer Motion](https://www.framer.com/motion/) - UI for drag
 
 **Note: These are just examples. Delete this note and replace the list above with your own choices**
 
@@ -66,6 +67,7 @@ Users should be able to:
 ### Useful resources
 
 - [How to setup font in NextJS](https://prismic.io/blog/nextjs-fonts)
+- [Customize Compnent with Styled Component](https://impact.hashnode.dev/how-to-add-a-prefix-icon-to-ant-design-select-component)
 
 ## Author
 
