@@ -8,9 +8,42 @@ import CustomSelect from './CustomSelect';
 import { Reorder, useDragControls, useMotionValue } from 'framer-motion';
 import { useRaisedShadow } from './use-raised-shadow';
 
+import githubIcon from '@/assets/images/icon-github.svg';
+
 interface Props {
   item: number;
 }
+
+const optionsList = [
+  { value: 'github', label: 'Github' },
+  { value: 'frontend-mentor', label: 'Frontend Mentor' },
+  { value: 'twitter', label: 'Twitter' },
+  { value: 'linkedin', label: 'LinkedIn' },
+  { value: 'youtube', label: 'YouTube' },
+  { value: 'facebook', label: 'Facebook' },
+  { value: 'twitch', label: 'Twitch' },
+  { value: 'devto', label: 'Dev.to' },
+  { value: 'codewars', label: 'Codewars' },
+  { value: 'freecodecamp', label: 'freeCodeCamp' },
+  { value: 'codepen', label: 'Codepen' },
+  { value: 'gitlab', label: 'GitLab' },
+  { value: 'hashnode', label: 'Hashmode' },
+  { value: 'stack-overflow', label: 'Stack Overflow' },
+];
+
+const selectOption = optionsList.map((item) => {
+  const { value, label } = item;
+  const output = {
+    value: value,
+    label: (
+      <div className=' flex flex-row gap-2 p-1'>
+        <Image src={`/icon-${value}.svg`} alt='icon' width='16' height='16' />{' '}
+        {label}
+      </div>
+    ),
+  };
+  return output;
+});
 
 export default function UserLinkSection({ item }: Props) {
   const y = useMotionValue(0);
@@ -37,24 +70,7 @@ export default function UserLinkSection({ item }: Props) {
         <label htmlFor='platform' className='text-gray'>
           Platform
         </label>
-        <CustomSelect
-          id='platform'
-          prefixIcon={<Image src={LinkIcon} alt='link icon' />}
-          options={[
-            { value: 'github', label: 'GitHub' },
-            { value: 'youtube', label: 'YouTube' },
-            { value: 'linkedin', label: 'LinkedIn' },
-            { value: 'devto', label: 'Dev.to' },
-            { value: 'codewars', label: 'Codewars' },
-            { value: 'freecodecamp', label: 'freeCodeCamp' },
-            { value: 'codepen', label: 'Codepen' },
-            { value: 'email', label: 'Email' },
-            { value: 'facebook', label: 'Facebook' },
-            { value: 'frontendmentor', label: 'Frontend Mentor' },
-            { value: 'gitlab', label: 'GitLab' },
-          ]}
-          className='h-10 w-full'
-        />
+        <Select id='platform' options={selectOption} className='h-10 w-full' />
 
         <label htmlFor='link' className='text-gray'>
           Link

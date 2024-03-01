@@ -68,6 +68,7 @@ Users should be able to:
 
 - [How to setup font in NextJS](https://prismic.io/blog/nextjs-fonts)
 - [Customize Compnent with Styled Component](https://impact.hashnode.dev/how-to-add-a-prefix-icon-to-ant-design-select-component)
+- [How to setup API by App Router](https://nextjs.org/docs/app/building-your-application/routing/route-handlers#request-body)
 
 ## Author
 

@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import uploadIcon from '@/assets/images/icon-upload-image.svg';
+import cx from 'classnames';
 
 export default function ImagePicker({ name }) {
   const [pickedImage, setPickedImage] = useState(null);
@@ -30,19 +31,30 @@ export default function ImagePicker({ name }) {
     imageInputRef.current.click();
   };
 
+  const pickerBtnStyle = cx(
+    'z-10 flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg p-1',
+    !pickedImage ? 'bg-purple-light text-purple-dark' : 'bg-black/30 text-white'
+  );
+
   return (
     <div className=' focus:bg-gray'>
       <div className=' mb-1 flex items-start gap-2'>
         <div className=' relative flex h-40 w-40 items-center justify-center rounded-lg text-center text-gray'>
           <button
-            className=' flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg bg-purple-light p-1 text-purple-dark'
+            className={pickerBtnStyle}
             type='button'
             onClick={handlePickClick}
           >
-            <Image src={uploadIcon} alt='upload icon' />+ Upload Image
+            <Image src={uploadIcon} alt='upload icon' />
+            {!pickedImage ? `+ Upload Image` : `Change Image`}
           </button>
           {pickedImage && (
-            <Image src={pickedImage} alt={'The image select by user'} fill />
+            <Image
+              src={pickedImage}
+              alt={'The image select by user'}
+              fill
+              className=' rounded-lg'
+            />
           )}
         </div>
         <input
