@@ -1,15 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Button, Form, Input } from 'antd';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
 const onFinish = async (values: FieldType) => {
-  const result = signIn('credentials', {
+  const result = await signIn('credentials', {
     redirect: false,
     email: values.email,
     password: values.password,
@@ -29,6 +29,7 @@ const LoginForm: React.FC = () => {
   const { status } = useSession();
 
   useEffect(() => {
+    console.log('status: ', status);
     if (status === 'authenticated') {
       redirect('/user/link');
     }

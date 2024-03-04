@@ -5,11 +5,11 @@ import { verifyPassword } from '../../../../lib/auth';
 
 const handler = NextAuth({
   session: {
-    jwt: true,
+    strategy: 'jwt',
   },
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
+      name: 'credentials',
       credentials: {
         username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
         password: { label: 'Password', type: 'password' },
@@ -18,7 +18,10 @@ const handler = NextAuth({
         const client = await connectToDatabase();
         const usersCollection = client.db().collection('users');
 
-        const user = usersCollection.findOne({ email: credentials.email });
+        const user = await usersCollection.findOne({
+          email: credentials.email,
+        });
+
         if (!user) {
           throw new Error('No User!');
         }

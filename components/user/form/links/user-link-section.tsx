@@ -1,17 +1,18 @@
 'use client';
 
-import { Button, Input, Select, Space } from 'antd';
+import { Button, Input, Select, Space, Form } from 'antd';
 import Image from 'next/image';
 
 import LinkIcon from '@/assets/images/icon-link.svg';
-import CustomSelect from './CustomSelect';
 import { Reorder, useDragControls, useMotionValue } from 'framer-motion';
-import { useRaisedShadow } from './use-raised-shadow';
-
-import githubIcon from '@/assets/images/icon-github.svg';
+import { useRaisedShadow } from '../use-raised-shadow';
+import { Dispatch, Key, SetStateAction } from 'react';
 
 interface Props {
-  item: number;
+  item: { platform: string; link: string };
+  items: { platform: string; link: string }[];
+  setItems: Dispatch<SetStateAction<{ platform: string; link: string }[]>>;
+  index: Key;
 }
 
 const optionsList = [
@@ -45,10 +46,20 @@ const selectOption = optionsList.map((item) => {
   return output;
 });
 
-export default function UserLinkSection({ item }: Props) {
+export default function UserLinkSection({
+  item,
+  items,
+  setItems,
+  index,
+}: Props) {
   const y = useMotionValue(0);
   const boxShadow = useRaisedShadow(y);
   const controls = useDragControls();
+
+  const handleDelete = () => {
+    const filterItems = items.filter((data, i) => i !== index);
+    setItems(filterItems);
+  };
 
   return (
     <Reorder.Item
@@ -63,9 +74,11 @@ export default function UserLinkSection({ item }: Props) {
             className='text-gray before:mr-3 before:inline-block before:h-full before:content-dragIcon'
             onPointerDown={(event) => controls.start(event)}
           >
-            {`Link # ${item}`}
+            {`Link # ${index}`}
           </h2>
-          <Button className='border-none text-gray'>Remove</Button>
+          <Button className='border-none text-gray' onClick={handleDelete}>
+            Remove
+          </Button>
         </div>
         <label htmlFor='platform' className='text-gray'>
           Platform

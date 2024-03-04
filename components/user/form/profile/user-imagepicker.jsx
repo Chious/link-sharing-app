@@ -5,9 +5,12 @@ import Image from 'next/image';
 import uploadIcon from '@/assets/images/icon-upload-image.svg';
 import cx from 'classnames';
 
-export default function ImagePicker({ name }) {
-  const [pickedImage, setPickedImage] = useState(null);
-
+export default function ImagePicker({
+  name,
+  defaultValue,
+  pickedImage,
+  setPickedImage,
+}) {
   function handleImageChange(event) {
     const file = event.target.files[0];
 

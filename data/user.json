@@ -1,0 +1,10 @@
+{
+  "userID": "1",
+  "porfile": {
+    "image": "https://raw.githubusercontent.com/Chious/link-sharing-app/main/assets/images/favicon-32x32.png",
+    "first_name": "Ben",
+    "last_name": "Wright",
+    "email": "user01@example.com"
+  },
+  "links": [{ "platform": "youtube", "link": "https://www.youtube.com" }]
+}

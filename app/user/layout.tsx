@@ -1,4 +1,5 @@
-import UserNavigatorDesktop from "@/components/user/user-navigator-desktop";
+import UserNavigatorDesktop from '@/components/user/user-navigator-desktop';
+import { UserProvider } from '@/context/user-context';
 
 export default function RootLayout({
   children,
@@ -6,13 +7,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body
-        className=" w-screen box-content bg-white-light"
-        style={{ height: "98vh" }}
+        className=' box-content w-screen bg-white-light'
+        style={{ height: '98vh' }}
       >
-        <UserNavigatorDesktop />
-        {children}
+        <UserProvider>
+          <UserNavigatorDesktop />
+          {children}
+        </UserProvider>
       </body>
     </html>
   );
