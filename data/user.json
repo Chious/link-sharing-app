@@ -6,5 +6,8 @@
     "last_name": "Wright",
     "email": "user01@example.com"
   },
-  "links": [{ "platform": "youtube", "link": "https://www.youtube.com" }]
+  "links": [
+    { "platform": "youtube", "link": "https://www.youtube.com" },
+    { "platform": "facebook", "link": "https://www.facebook.com" }
+  ]
 }

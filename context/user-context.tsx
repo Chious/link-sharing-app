@@ -11,7 +11,7 @@ export interface Profile {
   email: string;
 }
 
-interface Link {
+export interface Link {
   platform: string;
   link: string;
 }

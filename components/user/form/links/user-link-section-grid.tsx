@@ -5,20 +5,25 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import UserLinkSection from './user-link-section';
 
 interface Props {
-  items: { platform: string; link: string }[];
-  setItems: Dispatch<SetStateAction<{ platform: string; link: string }[]>>;
+  links: { platform: string; link: string }[];
+  setLinks: Dispatch<SetStateAction<{ platform: string; link: string }[]>>;
 }
 
-export const UserLinkSectionGrid: React.FC<Props> = ({ items, setItems }) => {
+export const UserLinkSectionGrid: React.FC<Props> = ({ links, setLinks }) => {
   return (
-    <Reorder.Group axis='y' values={items} onReorder={setItems}>
-      {items?.map((item, index) => (
+    <Reorder.Group
+      axis='y'
+      values={links}
+      onReorder={setLinks}
+      className='h-3/5 overflow-scroll'
+    >
+      {links?.map((item, index) => (
         <UserLinkSection
           item={item}
           key={index}
           index={index}
-          setItems={setItems}
-          items={items}
+          setItems={setLinks}
+          items={links}
         />
       ))}
     </Reorder.Group>

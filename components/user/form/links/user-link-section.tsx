@@ -80,20 +80,32 @@ export default function UserLinkSection({
             Remove
           </Button>
         </div>
-        <label htmlFor='platform' className='text-gray'>
-          Platform
-        </label>
-        <Select id='platform' options={selectOption} className='h-10 w-full' />
+        <Form.Item
+          name={`platform${index}`}
+          label='Platform'
+          labelCol={{ span: 24 }}
+          className=' text-gray'
+          rules={[{ required: true, message: 'Please select a platform!' }]}
+          initialValue={item.platform}
+        >
+          <Select options={selectOption} className='h-10 w-full' />
+        </Form.Item>
 
-        <label htmlFor='link' className='text-gray'>
-          Link
-        </label>
-        <Input
-          className='h-10'
-          id='link'
-          placeholder='e.g. https://www/github/com/'
-          prefix={<Image src={LinkIcon} alt='link icon' />}
-        />
+        <Form.Item
+          name={`link${index}`}
+          label='Link'
+          labelCol={{ span: 24 }}
+          className=' text-gray'
+          rules={[{ required: true, message: 'Link Should not be empty' }]}
+          initialValue={item.link}
+        >
+          <Input
+            className='h-10'
+            id='link'
+            placeholder='e.g. https://www/github/com/'
+            prefix={<Image src={LinkIcon} alt='link icon' />}
+          />
+        </Form.Item>
       </section>
     </Reorder.Item>
   );
