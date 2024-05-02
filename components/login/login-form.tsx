@@ -1,6 +1,5 @@
 'use client';
 
-import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Button, Form, Input } from 'antd';
 import Link from 'next/link';
@@ -26,11 +25,13 @@ type FieldType = {
 };
 
 const LoginForm: React.FC = () => {
-  const { status } = useSession();
+  const { status, data: session } = useSession();
 
   useEffect(() => {
     console.log('status: ', status);
     if (status === 'authenticated') {
+      const { id } = session.user;
+
       redirect('/user/link');
     }
   }, [status]);

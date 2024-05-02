@@ -6,12 +6,11 @@ import Image from 'next/image';
 import LinkIcon from '@/assets/images/icon-link.svg';
 import { Reorder, useDragControls, useMotionValue } from 'framer-motion';
 import { useRaisedShadow } from '../use-raised-shadow';
-import { Dispatch, Key, SetStateAction } from 'react';
+import { Key } from 'react';
+import { useUser } from '@/context/user-context';
 
 interface Props {
   item: { platform: string; link: string };
-  items: { platform: string; link: string }[];
-  setItems: Dispatch<SetStateAction<{ platform: string; link: string }[]>>;
   index: Key;
 }
 
@@ -46,19 +45,16 @@ const selectOption = optionsList.map((item) => {
   return output;
 });
 
-export default function UserLinkSection({
-  item,
-  items,
-  setItems,
-  index,
-}: Props) {
+export default function UserLinkSection({ item, index }: Props) {
   const y = useMotionValue(0);
   const boxShadow = useRaisedShadow(y);
   const controls = useDragControls();
 
+  const { links, setLinks } = useUser();
+
   const handleDelete = () => {
-    const filterItems = items.filter((data, i) => i !== index);
-    setItems(filterItems);
+    const filterItems = links.filter((data, i) => i !== index);
+    setLinks(filterItems);
   };
 
   return (

@@ -51,8 +51,11 @@ export async function POST(request: NextRequest) {
       .insertOne({ email: email, password: hashedPassword });
 
     client.close();
-    return new NextResponse(JSON.stringify({ message: 'Created user!' }), {
-      status: 201,
-    });
+    return new NextResponse(
+      JSON.stringify({ message: 'Created user!', data: result }),
+      {
+        status: 201,
+      }
+    );
   }
 }

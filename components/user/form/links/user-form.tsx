@@ -1,8 +1,7 @@
 import { Button, Form } from 'antd';
 import { UserLinkSectionGrid } from './user-link-section-grid';
-import { useUser } from '@/context/user-context';
-import { Dispatch, SetStateAction } from 'react';
-import { Link } from '@/context/user-context';
+import { useDispatch, useSelector } from 'react-redux';
+import { addLink, initialUser } from '@/context/redux/userSlice';
 
 type FormType = {
   [key: string]: string;
@@ -28,22 +27,23 @@ function transformToObjectArray(
   return result;
 }
 
-const onFinish = (
-  values: FormType,
-  setLinks: Dispatch<SetStateAction<Link[]>>
-) => {
+const onFinish = (values: FormType, initialUser: any) => {
   const transferedValue = transformToObjectArray(values);
+  const dispatch = useDispatch();
 
   //send link to DB
-  setLinks(transferedValue);
+  dispatch(initialUser(transferedValue));
 };
 
 export default function UserForm() {
-  const { setLinks, links } = useUser();
+  const user = useSelector((state) => state.user);
+  const { links } = user;
+
+  const dispatch = useDispatch();
 
   const handleAdd = () => {
     if (links.length < 5) {
-      setLinks([...links, { platform: '', link: '' }]);
+      dispatch(addLink());
     }
   };
 
@@ -64,10 +64,10 @@ export default function UserForm() {
         <Form
           className='flex h-full flex-col gap-3'
           onFinish={(value: FormType) => {
-            onFinish(value, setLinks);
+            onFinish(value, initialUser);
           }}
         >
-          <UserLinkSectionGrid links={links} setLinks={setLinks} />
+          <UserLinkSectionGrid />
           <div className='divider m-3 w-full border border-solid border-white-light' />
           <Button className='w-20' htmlType='submit'>
             Submit

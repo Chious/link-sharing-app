@@ -3,8 +3,9 @@
 import { Button, Form, Input } from 'antd';
 import { useState } from 'react';
 import ImagePicker from './user-imagepicker';
-import { useUser } from '@/context/user-context';
 import { Profile } from '@/context/user-context';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateProfile } from '@/context/redux/userSlice';
 
 type FieldType = {
   email?: string;
@@ -13,7 +14,13 @@ type FieldType = {
 };
 
 export default function UserProfileForm() {
-  const { profile, setProfile } = useUser();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const profile = {
+    email: user.email,
+    first_name: user.first_name,
+    last_name: user.last_name,
+  };
   const [pickedImage, setPickedImage] = useState(null);
 
   const onFinish = async (
@@ -31,12 +38,13 @@ export default function UserProfileForm() {
       lastName !== oldValues?.last_name
     ) {
       //update value;
-      setProfile({
-        email: email,
-        first_name: firstName,
-        last_name: lastName,
-        image: oldValues.image,
-      });
+      dispatch(
+        updateProfile({
+          email: email,
+          first_name: firstName,
+          last_name: lastName,
+        })
+      );
     }
 
     if (pickedImage !== null) {
